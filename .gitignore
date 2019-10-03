@@ -1,0 +1,6 @@
+.vscode
+__pycache__/
+env/
+webapp/config.
+__pycache__
+
