@@ -1,8 +1,6 @@
 from flask import current_app
 import requests
 
-print('*'*30)
-
 def weather_by_city(city_name):
     
     url_adr = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
@@ -33,6 +31,8 @@ print('*'*30)
 if __name__ == '__main__':
     print('*'*30)
     print(weather_by_city('Moscow,Russia'))
+
+
 
     
 

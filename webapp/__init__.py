@@ -3,7 +3,7 @@ import requests
 from webapp.weather import weather_by_city
 from webapp.python_org_news import get_python_news
 
-
+# запуск фласк в командной строке: export FLASK_APP=webapp && export FLASK_ENV=development && flask run
 
 def create_app():
 
