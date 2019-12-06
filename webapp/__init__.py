@@ -2,10 +2,13 @@ from flask import Flask, render_template
 import requests
 from webapp.weather import weather_by_city
 from webapp.model import db, News
+from webapp.forms import LoginForm
 
 # запуск фласк в командной строке: export FLASK_APP=webapp && export FLASK_ENV=development && flask run
 # запуск фласк в командной строке win: set FLASK_APP=webapp && set FLASK_ENV=development && set DEBUG_MODE=1 && flask
 # run
+
+
 
 def create_app():
 
@@ -19,5 +22,16 @@ def create_app():
         w = weather_by_city(app.config['WEATHER_DEFAULT_CITY'])
         nws = News.query.order_by(News.published.desc()).all()
         return render_template('index.html', page=page_title, weather=w, news_list=nws)
-        
+
+
+    @app.route('/login')
+    def login():
+        title = 'Авторизация'
+        login_form = LoginForm()
+        return render_template('login.html', page=title, form=login_form)
+
     return app
+
+if __name__ == '__main__':
+    create_app().run(debug=True)
+
