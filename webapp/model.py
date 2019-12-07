@@ -18,7 +18,7 @@ class News(db.Model):
 
 class User(db.Model, UserMixin):
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, index=True,)
     username = db.Column(db.String(64), nullable=False, index=True, unique=True)
     password = db.Column(db.String(128), nullable=False)
     role = db.Column(db.String, index=True)
