@@ -3,8 +3,10 @@ from flask import flash, redirect, url_for
 # flash - позволяет передавать сообщения между route-ами
 # redirect - делает перенаправление пользователя на другую страницу
 # url_for - помогает получить url по имени функции, которая этот url обрабатывает
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 # login_user - обработка формы логина
+# current_user - объект текущего пользователя
+# login_required -
 import requests
 from webapp.weather import weather_by_city
 from webapp.model import db, News, User
@@ -42,6 +44,9 @@ def create_app():
 
     @app.route('/login')
     def login():
+        if current_user.is_authenticated: # проверка соответствия пользователя по логину и паролю и переадресация его в index
+            return redirect(url_for('index'))
+
         title = 'Авторизация'
         login_form = LoginForm()
         return render_template('login.html', page=title, form=login_form)
@@ -69,6 +74,13 @@ def create_app():
         return redirect(url_for('login'))
 
 
+    @app.route('/admin')
+    @login_required
+    def admin_index():
+        if current_user.is_admin:
+            return 'Привет админ!'
+        else:
+            return 'Ты не админ.'
 
 
     return app

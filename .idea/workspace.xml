@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3af7b3bd-6bca-46ef-8c9f-b60b2eeebfc4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/lesson_web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lesson_web.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/so-dump.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp.db" beforeDir="false" afterPath="$PROJECT_DIR$/webapp.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webapp/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webapp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/webapp/templates/login.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
