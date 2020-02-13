@@ -27,14 +27,17 @@
                 {% endwith %}
                 <h2><b> {{page}} </b></h2>
                 <form action="{{ url_for('process_login') }}", method="POST">
-                    {{ form.hidden_tag() }}
+                    {{ form.hidden_tag() }} <!-- блок, который выводит все скрытые поля формы -->
                     <div class='form-group'>
-                        {{ form.username.label }}
-                        {{ form.username() }}
+                        {{ form.username.label }} <!-- .label выводит первый аргумент login_form.username 'Имя Пользователя' -->
+                        {{ form.username() }} <!-- Здесь в браузере будет форма <input id='username' name='username> ..
+                        . по
+                        ключюу 'username' получим значения имени ползователя ---->
                     </div>
                     <div class='form-group'>
                         {{ form.password.label }}
-                        {{ form.password() }}
+                        {{ form.password() }} <!-- Здесь в браузере будет форма <input id='passweord' name='password> ..
+                        . по ключюу 'password' получим введенное значения пароля ---->
                     </div>
                     <br>
                         {{ form.submit() }}

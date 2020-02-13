@@ -1,22 +1,23 @@
 from flask import Flask, render_template
-from flask import flash, redirect, url_for
-# flash - позволяет передавать сообщения между route-ами
-# redirect - делает перенаправление пользователя на другую страницу
-# url_for - помогает получить url по имени функции, которая этот url обрабатывает
+from flask import flash  #
+from flask import redirect  # деалет перенаправление со страницы на страницу
+from flask import url_for  # позволяет преобразовать по названию функции получить url
+    # flash - позволяет передавать сообщения между route-ами
+    # redirect - делает перенаправление пользователя на другую страницу
+    # url_for - помогает получить url по имени функции, которая этот url обрабатывает
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
-# login_user - обработка формы логина
-# current_user - объект текущего пользователя
-# login_required -
-import requests
+    # login_user - обработка формы логина
+    # current_user - объект текущего пользователя
+    # login_required - декоратор
+    # import requests
 from webapp.weather import weather_by_city
-from webapp.model import db, News, User
-from webapp.forms import LoginForm
+from webapp.model import db, News, User  # импорт модулей для связик с базой данных, создания экземпляров классов
+from webapp.forms import LoginForm  # импорт форм для ввода данных пользователя
 
 
-# запуск фласк в командной строке: export FLASK_APP=webapp && export FLASK_ENV=development && flask run
+# запуск фласк в командной строке unix: export FLASK_APP=webapp && export FLASK_ENV=development && flask run
 # запуск фласк в командной строке win: set FLASK_APP=webapp && set FLASK_ENV=development && set DEBUG_MODE=1 && flask
 # run
-
 
 
 def create_app():
@@ -25,15 +26,19 @@ def create_app():
     app.config.from_pyfile('config.py')
     db.init_app(app)
 
-    login_manager = LoginManager() # создание экземпляра логина
-    login_manager.init_app(app) # инициализация
-    login_manager.login_view = 'login' # как будет называться функция, которая будет заниаться логином, она определена ниже
+    login_manager = LoginManager()  # создание экземпляра логина менеджера
+    login_manager.init_app(app)  # инициализация (передаем ему app)
+    login_manager.login_view = 'login'  # как будет называться функция, которая будет заниматься логином,
+    # она определена ниже
 
 
     # Проверка пользователя
     @login_manager.user_loader
+    # функция, которая будет получать по id (user_id) нужного пользователя. Т.е при каждом заходе на страницу  Логин-
+    # менеджер будет обращаться к базе данных
+    # возвращает объект User, которы далее будет использоваться.
     def load_user(user_id):
-        return User.query.get(user_id) # запрос к базе данных
+        return User.query.get(user_id)  # запрос к базе данных
 
     @app.route('/')
     def index():
@@ -44,18 +49,21 @@ def create_app():
 
     @app.route('/login')
     def login():
-        if current_user.is_authenticated: # проверка соответствия пользователя по логину и паролю и переадресация его в index
+        # проверка соответствия пользователя по логину и паролю и переадресация его в index
+        if current_user.is_authenticated: # is_authenticated добавлен из UserMixin, который унаследован при создании
+            # класса User
             return redirect(url_for('index'))
 
         title = 'Авторизация'
         login_form = LoginForm()
+
         return render_template('login.html', page=title, form=login_form)
 
 
     @app.route('/logout')
     def logout():
         logout_user()
-        flash('вы успешно разлогинились')
+        flash('Вы успешно разлогинились')
         return redirect('index')
 
 
@@ -63,10 +71,11 @@ def create_app():
     def process_login():
         form = LoginForm()
 
-        if form.validate_on_submit(): # проверка данных формы
-            user = User.query.filter(User.username == form.username.data).first()
-            if user and user.check_password(form.password.data): # Проверка пользователя и пароля из формы
-                login_user(user) # залогинивание )
+        if form.validate_on_submit():  # проверка данных формы
+            user = User.query.filter(User.username == form.username.data).first()  # получение пользователя из базы
+            # данных
+            if user and user.check_password(form.password.data):  # Проверка пользователя и пароля из формы
+                login_user(user)  # залогинивание )
                 flash('Вы успешно зашли на сайт') # сообщение пользователю
                 return redirect(url_for('index'))
 
@@ -82,9 +91,7 @@ def create_app():
         else:
             return 'Ты не админ.'
 
-
     return app
 
 if __name__ == '__main__':
     create_app().run(debug=True)
-

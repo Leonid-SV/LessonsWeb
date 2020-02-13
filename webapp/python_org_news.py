@@ -16,7 +16,6 @@ def get_html(url):
 
 
 def get_python_news():
-
     html = get_html('http://www.python.org/blogs/')
     
     if html:
