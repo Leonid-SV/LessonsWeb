@@ -1,7 +1,9 @@
 from getpass import getpass  # позволяет что-то вводить в коммандной строке не выводя текст
 import sys
 from webapp import create_app
-from webapp.model import db, User
+from webapp.user.models import User
+from webapp.db import db
+
 app = create_app()
 
 with app.app_context():  # модуль делает доступным работу с базой данных
