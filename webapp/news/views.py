@@ -4,9 +4,10 @@ from webapp.weather import weather_by_city
 
 blueprint = Blueprint('news', __name__)
 
-@blueprint.route('/index')
+@blueprint.route('/')
 def index():
     page_title = 'Новости Python:'
     w = weather_by_city(current_app.config['WEATHER_DEFAULT_CITY'])
     nws = News.query.order_by(News.published.desc()).all()
-    return render_template('index.html', page=page_title, weather=w, news_list=nws)
+    return render_template('news/index.html', page=page_title, weather=w, news_list=nws) ## news/index.html - путь к
+    # странице
