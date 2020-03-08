@@ -12,6 +12,7 @@
     <title> {{ page }} </title>
   </head>
   <body>
+    {% include "menu.html" %}
     <div class = 'container'>
         <h2> Новостной сайт </h2>
         {% block content %}{% endblock %} <!--При наследовании block content будет заменяться ральным контентом -->

@@ -20,7 +20,7 @@ def login():
     title = 'Авторизация'
     login_form = LoginForm()
 
-    return render_template('login.html', page=title, form=login_form)
+    return render_template('user/login.html', page=title, form=login_form)
 
 
 @blueprint.route('/process_login', methods=['Post'])
